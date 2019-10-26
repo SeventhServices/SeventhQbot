@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using SeventhServices.QQRobot.Client.Formats;
+using SeventhServices.QQRobot.Client.Interface;
+using SeventhServices.QQRobot.Services;
+using WebApiClient.Defaults;
+using WebApiClient.Extensions.DependencyInjection;
+
 
 namespace SeventhServices.QQRobot
 {
@@ -21,14 +22,22 @@ namespace SeventhServices.QQRobot
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            });
+            services.AddHttpApi<IQqLightClient>().ConfigureHttpApiConfig(config =>
+            {
+                config.JsonFormatter = new JsonTextFormatter();
+            });
+            services.AddSingleton<SendMessageService>();
+            services.AddSingleton<RandomService>();
+            services.AddSingleton<RandomRepeat>();
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
