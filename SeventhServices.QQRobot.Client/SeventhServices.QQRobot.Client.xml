@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SeventhServices.QQRobot.Client</name>
+    </assembly>
+    <members>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.Friend">
+            <summary>
+            Friend
+            </summary>
+        </member>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.Group">
+            <summary>
+            Group
+            </summary>
+        </member>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.TemporarilyGroup">
+            <summary>
+            TemporarilyGroup
+            </summary>
+        </member>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.Discussion">
+            <summary>
+            Discussion
+            </summary>
+        </member>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.TemporarilyDiscussion">
+            <summary>
+            TemporarilyDiscussion
+            </summary>
+        </member>
+        <member name="F:SeventhServices.QQRobot.Client.Enums.MsgType.Temporarily">
+            <summary>
+            Temporarily
+            </summary>
+        </member>
+        <member name="P:SeventhServices.QQRobot.Client.Extensions.JsonPatchContext.MediaType">
+            <summary>获取对应的ContentType</summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Client.Extensions.JsonPatchContext.#ctor(System.String,System.Text.Encoding)">
+            <summary>http请求的json内容</summary>
+            <param name="json">json内容</param>
+            <param name="encoding">编码</param>
+        </member>
+    </members>
+</doc>

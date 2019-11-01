@@ -30,7 +30,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
-      "environmentVariables": {},
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
       "httpPort": 49565
     }
   }

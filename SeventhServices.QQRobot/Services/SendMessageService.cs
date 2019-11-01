@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using SeventhServices.QQRobot.Client.Abstractions;
 using SeventhServices.QQRobot.Client.Enums;
-using SeventhServices.QQRobot.Client.Interface;
 using SeventhServices.QQRobot.Client.Models;
 using SeventhServices.QQRobot.Models;
 
@@ -18,18 +18,18 @@ namespace SeventhServices.QQRobot.Services
             _qqLightClient = qqLightClient;
         }
 
-        public async Task<SendResult> SendAsync(string message ,string qq, MsgType msgType )
+        public async Task<SendResult> SendAsync(string message ,string qq, string group, MsgType msgType )
         {
             if (msgType == MsgType.Group)
             {
-                return await SendToGroupAsync(message, qq).ConfigureAwait(false);
+                return await SendToGroupAsync(message, group).ConfigureAwait(false);
             }
 
             var response = await _qqLightClient.SendMsgAsync(new SendMsgRequest
             {
                 ReceiveQq = qq,
                 MsgType = msgType,
-                Message = Util.FilterPic(message)
+                Message = ProcessMessageUtils.FilterReceivePic(message)
             });
 
             return new SendResult
@@ -47,7 +47,7 @@ namespace SeventhServices.QQRobot.Services
             {
                 ReceiveQq = qq,
                 MsgType = MsgType.Friend,
-                Message = Util.FilterPic(message)
+                Message = ProcessMessageUtils.FilterReceivePic(message)
             });
 
             return new SendResult
@@ -65,7 +65,7 @@ namespace SeventhServices.QQRobot.Services
             {
                 ReceiveGroup = group,
                 MsgType = MsgType.Group,
-                Message = Util.FilterPic(message)
+                Message = ProcessMessageUtils.FilterReceivePic(message)
             });
 
             return new SendResult

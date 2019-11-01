@@ -19,7 +19,6 @@ namespace SeventhServices.QQRobot.Client.Formats
 
         public object Deserialize(string json, Type objType)
         {
-
             return JsonSerializer.Deserialize(json, objType);
         }
     }

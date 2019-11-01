@@ -8,6 +8,8 @@ namespace SeventhServices.QQRobot.Client.Models
 
     public class SendMsgRequest
     {
+        [JsonIgnore]
+        public string TypeCode { get; set; } = "Api_SendMsg";
 
         [JsonPropertyName("类型")]
         public MsgType MsgType { get; set; }

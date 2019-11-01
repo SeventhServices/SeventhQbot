@@ -6,8 +6,18 @@ namespace SeventhServices.QQRobot.Models
     {
         public bool IsSuccess { get; set; }
         public string Qq { get; set; }
-        public MsgType MsgType { get; set; }
-        public string MsgTypeName { get; set; } = nameof(MsgType);
+
+        private MsgType _msgType;
+        public MsgType MsgType
+        {
+            get => _msgType;
+            set { 
+                _msgType = value;
+                MsgTypeName = _msgType.ToString();
+            }
+        }
+
+        public string MsgTypeName { get; set; }
         public string Message { get; set; }
     }
 }

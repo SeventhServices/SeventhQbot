@@ -4,7 +4,7 @@ using SeventhServices.QQRobot.Client.Models;
 using WebApiClient;
 using WebApiClient.Attributes;
 
-namespace SeventhServices.QQRobot.Client.Interface
+namespace SeventhServices.QQRobot.Client.Abstractions
 {
     [HttpHost("http://127.0.0.1:36524")]
     [TraceFilter(OutputTarget = OutputTarget.Console)]

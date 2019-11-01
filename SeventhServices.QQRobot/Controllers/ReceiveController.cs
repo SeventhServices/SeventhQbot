@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SeventhServices.QQRobot.Abstractions;
 using SeventhServices.QQRobot.Client.Enums;
-using SeventhServices.QQRobot.Client.Interface;
 using SeventhServices.QQRobot.Client.Models;
 using SeventhServices.QQRobot.Models;
 using SeventhServices.QQRobot.Services;
@@ -16,28 +16,35 @@ namespace SeventhServices.QQRobot.Controllers
     [Route("api/ReceiveMahuaOutput")]
     public class ReceiveController : ControllerBase
     {
-        private readonly RandomRepeat _randomRepeat;
+        private readonly IMessagePipeline _messagePipeline;
+        private readonly SendMessageService _sendMessage;
 
-        public ReceiveController(RandomRepeat randomRepeat)
+        public ReceiveController(IMessagePipeline messagePipeline,SendMessageService sendMessage)
         {
-            _randomRepeat = randomRepeat;
+            _messagePipeline = messagePipeline;
+            _sendMessage = sendMessage;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] Receive receive , [FromServices] IQqLightClient myPcQqClient)
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IActionResult> Index([FromBody] BotReceive botReceive)
         {
-            if (receive != null && receive.Message == null) return Ok();
+            if (botReceive?.Result != null)
+            {
+                await _sendMessage.SendToFriendAsync(botReceive.Result)
+                    .ConfigureAwait(false);
+                return Ok();
+            }
 
-            await _randomRepeat.SetGroup(RobotOptions.TestGroup, 
-                0.1F,receive).ConfigureAwait(false);
+            if (botReceive?.Message == null)
+            {
+                return Ok();
+            }
 
-            await _randomRepeat.Set(() 
-                    => receive != null 
-                       && (receive.Type == MsgType.Friend
-                        || receive.Type == MsgType.TemporarilyGroup)
-                , 0.5F, receive).ConfigureAwait(false);
+            await _messagePipeline.Pocess(botReceive).ConfigureAwait(false);
 
             return Ok();
         }
+
     }
 }

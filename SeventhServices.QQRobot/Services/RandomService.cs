@@ -1,9 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace SeventhServices.QQRobot.Services
 {
     public class RandomService
     {
+
         private readonly Random _random = new Random();
 
         public bool RandomBool(float probability)
