@@ -41,6 +41,7 @@ namespace SeventhServices.QQRobot.Services
         {
             if (botReceive != null && botReceive.FromGroup == @group)
             {
+
                 if (_randomService.RandomBool(probability))
                 {
                     await _sendMessageService.SendToGroupAsync(

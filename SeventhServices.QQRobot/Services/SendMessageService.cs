@@ -8,11 +8,18 @@ using SeventhServices.QQRobot.Models;
 
 namespace SeventhServices.QQRobot.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SendMessageService
     {
         private readonly IQqLightClient _qqLightClient;
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qqLightClient"></param>
         public SendMessageService(IQqLightClient qqLightClient)
         {
             _qqLightClient = qqLightClient;

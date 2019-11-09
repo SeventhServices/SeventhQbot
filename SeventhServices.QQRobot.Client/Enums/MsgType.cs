@@ -6,6 +6,11 @@ using System.Text.RegularExpressions;
 namespace SeventhServices.QQRobot.Client.Enums
 {
 
+    /// <summary>
+    /// Friend = 1, Group = 2, TemporarilyGroup = 3,
+    /// Discussion = 4, TemporarilyDiscussion = 5,
+    /// Temporarily = 6
+    /// </summary>
     public enum MsgType
     {
         /// <summary>

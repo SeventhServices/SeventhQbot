@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SeventhServices.Asset.LocalDB;
+using SqlParse.Classes;
 
 namespace SeventhServices.QQRobot
 {

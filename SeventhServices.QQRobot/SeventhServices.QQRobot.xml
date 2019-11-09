@@ -4,5 +4,52 @@
         <name>SeventhServices.QQRobot</name>
     </assembly>
     <members>
+        <member name="T:SeventhServices.QQRobot.Commands.CardCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SeventhServices.QQRobot.Commands.CardCommand.CardId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Services.MessageParser.Parse(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Services.RandomService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Services.RandomService.RandomBool(System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="probability"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Services.RandomService.RandomBoolTest(System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="probability"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Services.SendMessageService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Services.SendMessageService.#ctor(SeventhServices.QQRobot.Client.Abstractions.IQqLightClient)">
+            <summary>
+            
+            </summary>
+            <param name="qqLightClient"></param>
+        </member>
     </members>
 </doc>
