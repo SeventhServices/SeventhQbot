@@ -9,6 +9,12 @@
             
             </summary>
         </member>
+        <member name="F:SeventhServices.QQRobot.Commands.CardCommand.cardId">
+             <summary>
+             
+             </summary>
+            
+        </member>
         <member name="P:SeventhServices.QQRobot.Commands.CardCommand.CardId">
             <summary>
             

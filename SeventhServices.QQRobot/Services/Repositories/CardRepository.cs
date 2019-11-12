@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SeventhServices.Asset.LocalDB;
+using SeventhServices.Asset.LocalDB.Classes;
 using SeventhServices.QQRobot.Abstractions;
-using SqlParse.Classes;
 
 namespace SeventhServices.QQRobot.Services
 {

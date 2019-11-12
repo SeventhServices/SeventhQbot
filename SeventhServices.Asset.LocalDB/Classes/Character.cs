@@ -1,8 +1,10 @@
-﻿namespace SeventhServices.Asset.LocalDB.Classes
+﻿using SeventhServices.Asset.LocalDB.Abstractions;
+
+namespace SeventhServices.Asset.LocalDB.Classes
 {
-    public class Character
+    public class Character : Entity
     {
-        public string CharacterId { get; set; }
+        public int CharacterId { get; set; }
         public string CharacterName { get; set; }
         public string FirstName { get; set; }
         public string CharaNormalImageId { get; set; }
@@ -27,5 +29,7 @@
         public string SegmentId { get; set; }
         public string EnglishName { get; set; }
         public string DeleteFlg { get; set; }
+
+
     }
 }

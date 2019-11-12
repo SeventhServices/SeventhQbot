@@ -1,10 +1,10 @@
 ﻿using SeventhServices.QQRobot.Abstractions;
 using SeventhServices.QQRobot.Models;
 using System.Threading.Tasks;
+using SeventhServices.Asset.LocalDB.Classes;
 using SeventhServices.QQRobot.Classes;
 using SeventhServices.QQRobot.Client.Enums;
 using SeventhServices.QQRobot.Commands;
-using SqlParse.Classes;
 
 namespace SeventhServices.QQRobot.Services
 {
@@ -39,14 +39,15 @@ namespace SeventhServices.QQRobot.Services
             if (command == null)
             { 
                  await Random(receive).ConfigureAwait(false);
+                 return;
             }
 
-            switch (command)
-            {
-                case CardCommand c:
-                    c.ReturnMessage = _cardRepository.GetById(c.CardId).ToString();
-                    break;
-            }
+            //switch (command)
+            //{
+            //    case CardCommand c:
+            //        c.ReturnMessage = _cardRepository.GetById(c.CardId).ToString();
+            //        break;
+            //}
 
             await _sendMessage.SendAsync(command?.ReturnMessage, 
                  receive.FromQq, receive.FromGroup, receive.Type)
@@ -60,7 +61,7 @@ namespace SeventhServices.QQRobot.Services
         private async Task Random(BotReceive receive)
         {
             await _randomRepeat.SetGroup(RobotOptions.TestGroup,
-                0.2F, receive).ConfigureAwait(false);
+                0.05F, receive).ConfigureAwait(false);
 
             await _randomRepeat.SetGroup(RobotOptions.ServeGroup,
                 0.01F, receive).ConfigureAwait(false);

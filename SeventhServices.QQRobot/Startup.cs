@@ -11,13 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using SeventhServices.Asset.LocalDB;
+using SeventhServices.Asset.LocalDB.Classes;
 using SeventhServices.QQRobot.Abstractions;
 using SeventhServices.QQRobot.Client.Abstractions;
 using SeventhServices.QQRobot.Client.Formats;
 using SeventhServices.QQRobot.Services;
-using SqlParse.Classes;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using WebApiClient.Defaults;
 using WebApiClient.Extensions.DependencyInjection;
 
 
@@ -50,14 +48,11 @@ namespace SeventhServices.QQRobot
             services.AddSingleton<SendMessageService>();
             services.AddSingleton<RandomService>();
             services.AddSingleton<RandomRepeat>();
-            services.AddSingleton<MessageParser>();
             services.AddSingleton<LocalDbLoader>();
-
             services.AddSingleton<IRepository<Card>,CardRepository>();
-
-
+            services.AddSingleton<IRepository<Character>, CharacterRepository>();
+            services.AddSingleton<MessageParser>();
             services.AddSingleton<IMessagePipeline,SimpleReturnPipeline>();
-
 
             services.AddSwaggerGen(options =>
             {
@@ -98,6 +93,7 @@ namespace SeventhServices.QQRobot
 
             app.UseRouting();
 
+            app.UseStaticFiles();
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

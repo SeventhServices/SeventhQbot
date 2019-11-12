@@ -1,6 +1,8 @@
+using SeventhServices.Asset.LocalDB.Abstractions;
+
 namespace SeventhServices.Asset.LocalDB.Classes
 {
-    public class Card
+    public class Card : Entity
     {
         public int CardId { get; set; }
 		public string CharacterId { get; set; }
@@ -39,15 +41,15 @@ namespace SeventhServices.Asset.LocalDB.Classes
 		public string StartTime { get; set; }
 		public string DeleteFlg { get; set; }
 
-        public override string ToString()
-        {
-            return $"Name : {CardName} \n" +
-                   $"Description : {Description} \n" +
-                   $"7thPt : {Payback7thpt} Cost {Cost} \n" +
-                   $"Level(Max) : {MaxLevel} £ºLevel(BMax) : {BreakMaxLevel} \n" +
-                   $"HP(lv.1) : {DefaultHp} ATK(lv.1) £º{DefaultAttack} \n" +
-                   $"HP(Max) : {MaxHp} ATK(Max) £º{MaxAttack} \n" +
-                   $"HP(BMax) : {BreakMaxHp} ATK(BMax) £º{BreakMaxAttack} ";
-        }
+        //public override string ToString()
+        //{
+        //    return $"Name : {CardName} \n" +
+        //           $"Description : {Description} \n" +
+        //           $"7thPt : {Payback7thpt} Cost {Cost} \n" +
+        //           $"Level(Max) : {MaxLevel} £ºLevel(BMax) : {BreakMaxLevel} \n" +
+        //           $"HP(lv.1) : {DefaultHp} ATK(lv.1) £º{DefaultAttack} \n" +
+        //           $"HP(Max) : {MaxHp} ATK(Max) £º{MaxAttack} \n" +
+        //           $"HP(BMax) : {BreakMaxHp} ATK(BMax) £º{BreakMaxAttack} ";
+        //}
     }
 }

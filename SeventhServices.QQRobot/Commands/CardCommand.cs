@@ -10,8 +10,13 @@ namespace SeventhServices.QQRobot.Commands
         /// <summary>
         /// 
         /// </summary>
-        public int CardId { get; set; }
+        ///
 
-        
+        private int cardId;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int CardId {get;set;}
+
     }
 }
