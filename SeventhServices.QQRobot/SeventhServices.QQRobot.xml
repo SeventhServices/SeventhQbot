@@ -4,27 +4,17 @@
         <name>SeventhServices.QQRobot</name>
     </assembly>
     <members>
-        <member name="T:SeventhServices.QQRobot.Commands.CardCommand">
+        <member name="T:SeventhServices.QQRobot.Extensions.CommandParserExtension">
             <summary>
             
             </summary>
         </member>
-        <member name="F:SeventhServices.QQRobot.Commands.CardCommand.cardId">
-             <summary>
-             
-             </summary>
-            
-        </member>
-        <member name="P:SeventhServices.QQRobot.Commands.CardCommand.CardId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SeventhServices.QQRobot.Services.MessageParser.Parse(System.String)">
+        <member name="M:SeventhServices.QQRobot.Services.MessageParser.Parse(System.String,System.String)">
             <summary>
             
             </summary>
             <param name="message"></param>
+            <param name="qq"></param>
             <returns></returns>
         </member>
         <member name="T:SeventhServices.QQRobot.Services.RandomService">

@@ -2,10 +2,7 @@
 using SeventhServices.QQRobot.Models;
 using System.Threading.Tasks;
 using SeventhServices.Asset.LocalDB.Classes;
-using SeventhServices.QQRobot.Classes;
 using SeventhServices.QQRobot.Client.Enums;
-using SeventhServices.QQRobot.Commands;
-
 namespace SeventhServices.QQRobot.Services
 {
     public class SimpleReturnPipeline : IMessagePipeline
@@ -13,18 +10,15 @@ namespace SeventhServices.QQRobot.Services
         private readonly RandomRepeat _randomRepeat;
         private readonly MessageParser _messageParser;
         private readonly SendMessageService _sendMessage;
-        private readonly IRepository<Card> _cardRepository;
 
         public SimpleReturnPipeline(RandomRepeat randomRepeat,
             MessageParser messageParser,
-            SendMessageService sendMessage,
-            IRepository<Card> cardRepository
-            )
+            SendMessageService sendMessage
+        )
         {
             _randomRepeat = randomRepeat;
             _messageParser = messageParser;
             _sendMessage = sendMessage;
-            _cardRepository = cardRepository;
         }
 
         public async Task Pocess(BotReceive receive)
@@ -34,7 +28,7 @@ namespace SeventhServices.QQRobot.Services
                 return;
             }
 
-            var command = _messageParser.Parse(receive.Message);
+            var command = _messageParser.Parse(receive.Message, receive.FromQq);
 
             if (command == null)
             { 
@@ -42,16 +36,13 @@ namespace SeventhServices.QQRobot.Services
                  return;
             }
 
-            //switch (command)
-            //{
-            //    case CardCommand c:
-            //        c.ReturnMessage = _cardRepository.GetById(c.CardId).ToString();
-            //        break;
-            //}
+            foreach (var message in command.ReturnMessage)
+            {
+                await _sendMessage.SendAsync(message,
+                        receive.FromQq, receive.FromGroup, receive.Type)
+                    .ConfigureAwait(false);
+            }
 
-            await _sendMessage.SendAsync(command?.ReturnMessage, 
-                 receive.FromQq, receive.FromGroup, receive.Type)
-                 .ConfigureAwait(false);
         }
 
 

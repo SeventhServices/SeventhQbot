@@ -21,6 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview1.19506.1" />
+    <PackageReference Include="SeventhServices.Asset" Version="0.0.3-develop" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="WebApiClient.Extensions.DependencyInjection" Version="2.0.3" />
   </ItemGroup>
@@ -28,10 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SeventhServices.Asset.LocalDB\SeventhServices.Asset.LocalDB.csproj" />
     <ProjectReference Include="..\SeventhServices.QQRobot.Client\SeventhServices.QQRobot.Client.csproj" />
+    <ProjectReference Include="..\SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

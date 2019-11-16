@@ -5,7 +5,7 @@ namespace SeventhServices.Asset.LocalDB.Classes
     public class Card : Entity
     {
         public int CardId { get; set; }
-		public string CharacterId { get; set; }
+		public int CharacterId { get; set; }
 		public string PotentialGroup { get; set; }
 		public string RarityId { get; set; }
 		public string CardTypeId { get; set; }

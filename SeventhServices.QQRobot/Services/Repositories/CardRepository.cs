@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SeventhServices.Asset.LocalDB;
 using SeventhServices.Asset.LocalDB.Classes;
@@ -19,6 +20,17 @@ namespace SeventhServices.QQRobot.Services
         public Card GetById(int id)
         {
             return _cards.Find(c => c.CardId == id);
+        }
+
+        public List<Card> GetByCharacterId(int id)
+        {
+            return _cards.Where(c => c.CharacterId == id).Select(c => c).ToList();
+        }
+
+        public Card FuzzyGetByName(string name)
+        {
+            return _cards.Find(c =>
+                c.CardName.Contains(name, StringComparison.CurrentCulture));
         }
     }
 }

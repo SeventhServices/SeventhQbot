@@ -9,7 +9,7 @@ namespace SeventhServices.Asset.LocalDB.Abstractions
             var properties = GetType().GetProperties();
 
             return string.Join("\n",
-                properties.Take(5).Select(p =>
+                properties.Take(10).Select(p =>
                     $"[{p.Name}]:{p.GetValue(this)}"
                 ));
         }
