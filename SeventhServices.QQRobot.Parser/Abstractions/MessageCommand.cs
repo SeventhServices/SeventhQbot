@@ -6,6 +6,8 @@ namespace SeventhServices.QQRobot.Parser.Abstractions
     {
         public List<string> ReturnMessage { get; set; } = new List<string>();
 
-        public bool CanReturn { get; set; } = true;
+        public bool Continue { get; set; }
+
+        public bool Break { get; set; }
     }
 }

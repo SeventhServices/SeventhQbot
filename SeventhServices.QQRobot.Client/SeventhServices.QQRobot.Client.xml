@@ -4,6 +4,23 @@
         <name>SeventhServices.QQRobot.Client</name>
     </assembly>
     <members>
+        <member name="T:SeventhServices.QQRobot.Client.Abstractions.IMahuaClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Client.Abstractions.IQqLightClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Client.Abstractions.IQqLightClient.Invoke(SeventhServices.QQRobot.Client.Models.QqLightClient.InvokeModel)">
+            <summary>
+            
+            </summary>
+            <param name="invokeModel"></param>
+            <returns></returns>
+        </member>
         <member name="T:SeventhServices.QQRobot.Client.Enums.MsgType">
             <summary>
             Friend = 1, Group = 2, TemporarilyGroup = 3,

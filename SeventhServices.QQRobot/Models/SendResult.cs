@@ -6,7 +6,7 @@ namespace SeventhServices.QQRobot.Models
     {
         public bool IsSuccess { get; set; }
         public string Qq { get; set; }
-
+        public string Group { get; set; }
         private MsgType _msgType;
         public MsgType MsgType
         {

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.Asset.LocalDB", "SeventhServices.Asset.LocalDB\SeventhServices.Asset.LocalDB.csproj", "{74919C13-65F1-4A1C-A179-12953F2176EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeventhServices.QQRobot.Parser", "SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj", "{646F8348-6A78-4EC3-9721-7CD7A1B2842B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Parser", "SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj", "{646F8348-6A78-4EC3-9721-7CD7A1B2842B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Resource", "SeventhServices.QQRobot.Resource\SeventhServices.QQRobot.Resource.csproj", "{AD719076-4640-4605-8B0D-18087BCF5D23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{646F8348-6A78-4EC3-9721-7CD7A1B2842B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{646F8348-6A78-4EC3-9721-7CD7A1B2842B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{646F8348-6A78-4EC3-9721-7CD7A1B2842B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD719076-4640-4605-8B0D-18087BCF5D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD719076-4640-4605-8B0D-18087BCF5D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD719076-4640-4605-8B0D-18087BCF5D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD719076-4640-4605-8B0D-18087BCF5D23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

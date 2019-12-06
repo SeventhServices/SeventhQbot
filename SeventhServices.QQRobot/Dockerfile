@@ -1,10 +1,16 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 65321
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["SeventhServices.QQRobot/SeventhServices.QQRobot.csproj", "SeventhServices.QQRobot/"]
+COPY ["SeventhServices.QQRobot.Client/SeventhServices.QQRobot.Client.csproj", "SeventhServices.QQRobot.Client/"]
+COPY ["SeventhServices.QQRobot.Resource/SeventhServices.QQRobot.Resource.csproj", "SeventhServices.QQRobot.Resource/"]
+COPY ["SeventhServices.Asset.LocalDB/SeventhServices.Asset.LocalDB.csproj", "SeventhServices.Asset.LocalDB/"]
+COPY ["SeventhServices.QQRobot.Parser/SeventhServices.QQRobot.Parser.csproj", "SeventhServices.QQRobot.Parser/"]
 RUN dotnet restore "SeventhServices.QQRobot/SeventhServices.QQRobot.csproj"
 COPY . .
 WORKDIR "/src/SeventhServices.QQRobot"

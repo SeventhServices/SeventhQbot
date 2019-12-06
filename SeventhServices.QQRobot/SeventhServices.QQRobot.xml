@@ -4,10 +4,65 @@
         <name>SeventhServices.QQRobot</name>
     </assembly>
     <members>
-        <member name="T:SeventhServices.QQRobot.Extensions.CommandParserExtension">
+        <member name="P:SeventhServices.QQRobot.Common.MemoryCache.EventRankingMemoryCache">
             <summary>
             
             </summary>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Extensions.ICommandParserExtensionExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Extensions.NetworkModelExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Extensions.NetworkModelExtension.FormatRanking(SeventhServices.Client.Network.Models.Response.Event.EventRankingUserResponse,System.DateTime,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <param name="dateTime"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Extensions.NetworkModelExtension.FormatRanking(SeventhServices.Client.Network.Models.Response.Event.EventRankingUserResponse,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Extensions.NetworkModelExtension.FormatBorder(SeventhServices.Client.Network.Models.Response.Event.EventRankingUserResponse,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Extensions.NetworkModelExtension.FormatBorder(SeventhServices.Client.Network.Models.Response.Event.EventRankingUserResponse)">
+            <summary>
+            
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SeventhServices.QQRobot.Services.BindDictionary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SeventhServices.QQRobot.Services.BindDictionary.TryGetAccount(System.String,SeventhServices.Asset.Common.Classes.Account@)">
+            <summary>
+            Get account
+            </summary>
+            <param name="qq"></param>
+            <param name="account"></param>
+            <returns></returns>
         </member>
         <member name="M:SeventhServices.QQRobot.Services.MessageParser.Parse(System.String,System.String)">
             <summary>

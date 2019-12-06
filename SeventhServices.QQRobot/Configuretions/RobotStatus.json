@@ -1,0 +1,10 @@
+{
+  "LastEventBorderDateTime": "2019-12-06T22:03:07.3654629+08:00",
+  "OpenEventType": 12,
+  "Downloadconfig": {
+    "Domain": "https://d2kvktrbzlzxwg.cloudfront.net/",
+    "SubDomain": "https://cache.t7s.jp/",
+    "OneByOneDownloadPath": "revision/raw373_addaca8ad3cf92db8400b3da1b2bfd6c/"
+  },
+  "LastModify": "2019-12-06T14:03:07.3682604Z"
+}

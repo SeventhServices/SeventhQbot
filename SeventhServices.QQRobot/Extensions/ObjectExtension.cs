@@ -28,5 +28,17 @@ namespace SeventhServices.QQRobot.Extensions
                     $"[{p.Name}]:{p.GetValue(obj)}"
                 ));
         }
+
+        public static string FormatToString(this Type obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj)); ;
+
+            var properties = obj.GetProperties();
+
+            return string.Join("\n",
+                properties.Select(p =>
+                    $"[{p.Name}]:{p.GetValue(obj)}"
+                ));
+        }
     }
 }

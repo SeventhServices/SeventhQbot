@@ -4,15 +4,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>959ad265-992d-4eea-8cd1-e57ee49c9510</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\Sagilio\source\repos\SeventhServices.QQRobot\SeventhServices.QQRobot\SeventhServices.QQRobot.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Sagilio\source\repos\SeventhServices.QQRobot\SeventhServices.QQRobot\SeventhServices.QQRobot.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +22,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0-preview3.19554.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview1.19506.1" />
-    <PackageReference Include="SeventhServices.Asset" Version="0.0.3-develop" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="SeventhServices.Asset" Version="0.0.9-develop" />
+    <PackageReference Include="SeventhServices.Asset.Services" Version="0.0.9-develop" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="WebApiClient.Extensions.DependencyInjection" Version="2.0.3" />
   </ItemGroup>
@@ -30,6 +38,7 @@
     <ProjectReference Include="..\SeventhServices.Asset.LocalDB\SeventhServices.Asset.LocalDB.csproj" />
     <ProjectReference Include="..\SeventhServices.QQRobot.Client\SeventhServices.QQRobot.Client.csproj" />
     <ProjectReference Include="..\SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj" />
+    <ProjectReference Include="..\SeventhServices.QQRobot.Resource\SeventhServices.QQRobot.Resource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,10 +46,6 @@
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(TargetDir)GameSql&#xD;&#xA;xcopy /y /e /s $(SolutionDir)GameSql $(TargetDir)GameSql" />
-  </Target>
 
 
 </Project>

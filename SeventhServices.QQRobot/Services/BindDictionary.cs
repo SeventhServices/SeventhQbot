@@ -4,6 +4,9 @@ using SeventhServices.Asset.Common.Classes;
 
 namespace SeventhServices.QQRobot.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BindDictionary
     {
         private readonly Dictionary<string,Account> _bindAccounts 
@@ -14,6 +17,17 @@ namespace SeventhServices.QQRobot.Services
             return _bindAccounts.TryAdd(qq, new Account(pid,id));
         }
 
+        public bool TryAddAccount(string qq, string pid, string id,string ivs)
+        {
+            return _bindAccounts.TryAdd(qq, new Account(pid, id, ivs));
+        }
+
+        /// <summary>
+        /// Get account
+        /// </summary>
+        /// <param name="qq"></param>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public bool TryGetAccount(string qq, out Account account)
         {
             return _bindAccounts.TryGetValue(qq, out account);

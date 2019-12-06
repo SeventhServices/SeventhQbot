@@ -6,7 +6,7 @@ namespace SeventhServices.Asset.LocalDB.Extensions
 {
     public static class PathExtension
     {
-        public static readonly string Local = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+        public static string Local { get; set; } = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
         public static string GetGameSqlDirectory()
         {

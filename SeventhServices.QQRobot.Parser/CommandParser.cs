@@ -30,10 +30,23 @@ namespace SeventhServices.QQRobot.Parser
             foreach (var parsing in _parsings)
             {
                 var command = parsing.TryParse(ref message, qq);
-                if ( command != null && command.CanReturn)
+
+                if (command == null)
                 {
-                    return command;
+                    continue;
                 }
+
+                if (command.Break)
+                {
+                    break;
+                }
+
+                if (command.Continue)
+                {
+                    continue;
+                }
+
+                return command;
             }
 
             return null;

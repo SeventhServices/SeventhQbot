@@ -4,33 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SeventhServices.QQRobot.Abstractions.Services;
 using SeventhServices.QQRobot.Client.Abstractions;
 using SeventhServices.QQRobot.Client.Enums;
 using SeventhServices.QQRobot.Client.Models;
+using SeventhServices.QQRobot.Client.Models.MahuaClient;
 using SeventhServices.QQRobot.Services;
+using SeventhServices.QQRobot.Utils;
 
 namespace SeventhServices.QQRobot.Controllers
 {
     [Route("Message")]
     public class SendController : Controller
     {
-        private readonly SendMessageService _sendMessageService;
+        private readonly ISendMessageService _sendMessageService;
         private readonly IQqLightClient _qqLightClient;
 
-        public SendController(SendMessageService sendMessageService,IQqLightClient qqLightClient)
+        public SendController(ISendMessageService sendMessageService,IQqLightClient qqLightClient)
         {
             _sendMessageService = sendMessageService;
             _qqLightClient = qqLightClient;
         }
 
-        [HttpGet]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<IActionResult> Index()
-        {
-            await _qqLightClient.GetNickAsync(new GetNikeRequest {Qq = RobotOptions.MasterQq}).ConfigureAwait(true);
-            var sendResult = await _sendMessageService.SendToFriendAsync(@"").ConfigureAwait(false);
-            return Ok(sendResult);
-        }
 
         [HttpGet("Text")]
         public async Task<IActionResult> Text(string context, string qq = RobotOptions.MasterQq,

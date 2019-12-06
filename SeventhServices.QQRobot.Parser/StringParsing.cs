@@ -12,6 +12,7 @@ namespace SeventhServices.QQRobot.Parser
         private readonly Action<MessageCommand> _action;
         private readonly string _defaultReturnString = "www";
         private string _startString = string.Empty;
+        private bool _BreakOnFailed;
 
         public StringParsing(Action<MessageCommand> action)
         {
@@ -52,21 +53,31 @@ namespace SeventhServices.QQRobot.Parser
             return this;
         }
 
+        public StringParsing BreakOnFailed(bool breakOnFailed)
+        {
+            _BreakOnFailed = breakOnFailed;
+            return this;
+        }
 
         public MessageCommand TryParse(ref string message, string qq)
         {
-            MessageCommand command;
+
+            var command = new TextReturnCommand();
             if (string.IsNullOrEmpty(_startString))
             {
-                command = new TextReturnCommand();
-                SelectAction(command,message,qq);
+                SelectAction(command,message, qq);
                 return command;
             }
             if (message.StartsWith(_startString))
             {
                 message = message.TrimStart(_startString.ToCharArray());
-                command = new TextReturnCommand();
-                SelectAction(command, message,qq);
+                SelectAction(command, message, qq);
+                return command;
+            }
+
+            if (_BreakOnFailed)
+            {
+                command.Break = true;
                 return command;
             }
 
