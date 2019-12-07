@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Encodings.Web;
@@ -10,9 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Converters;
 using SeventhServices.Asset;
-using SeventhServices.Asset.Common.Classes;
 using SeventhServices.Asset.LocalDB;
 using SeventhServices.Asset.LocalDB.Classes;
 using SeventhServices.QQRobot.Abstractions;

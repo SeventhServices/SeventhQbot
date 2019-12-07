@@ -9,10 +9,11 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+bot.db
 
 # User-specific directory
 GameSqls/
+Configuretions/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

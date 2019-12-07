@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.ComponentModel.Design;
 using System.Security;
-using System.Xml.Serialization;
 using SeventhServices.QQRobot.Parser.Abstractions;
 
 namespace SeventhServices.QQRobot.Parser

@@ -194,14 +194,6 @@ namespace SeventhServices.QQRobot.Services
                 })
                 .WhenStartWith("当前缓存状态"));
 
-            //_commandParser.Add(new StringParsing((c, m) =>
-            //    {
-            //        c.ReturnMessage.Add(string.Concat("DEBUG\n",
-            //            "[Account]\n", _statusService.Account.Pid, "/", _statusService.Account.Uuid,
-            //            "[Version]\n", $"[Rev] :", _statusService.Rev, "\n/", _statusService.GameVersion.FormatToString()));
-            //    })
-            //    .WhenStartWith("当前环境状态"));
-
             _commandParser.Add(new StringParsing((c, m, q) =>
                 {
                     var binding = _bindRepository.GetByQq(q).ToArray();
@@ -476,8 +468,14 @@ namespace SeventhServices.QQRobot.Services
             _commandParser.Add(
                 new StringParsing((c, m) =>
                 {
-                    var characterId = _characterRepository.FuzzyGetByName(m.Trim())?.CharacterId;
-                    var indexMessage = _cardRepository.GetByCharacterId(characterId ?? 1)
+                    var character = _characterRepository.FuzzyGetByName(m.Trim());
+                    if (character == null)
+                    {
+                        c.ReturnMessage.Add("团团没有到这位偶像…当然卡就更没找到了……");
+                        return;
+                    }
+
+                    var indexMessage = _cardRepository.GetByCharacterId(character.CharacterId)
                         .Distinct(card => card.CardName)
                         .Select((card, index) => new { index = index / 10, card })
                         .GroupBy(i => i.index)
@@ -490,23 +488,33 @@ namespace SeventhServices.QQRobot.Services
             _commandParser.Add(
                 new StringParsing((c, m) =>
                 {
-                    var useId = TryGetNum(m, out var id);
-                    c.ReturnMessage.Add(useId
+                    var result = TryGetNum(m, out var id);
+                    c.ReturnMessage.Add(result
                         ? _characterRepository.GetById(id).ToString()
-                        : _characterRepository.FuzzyGetByName(m).ToString());
+                        : _characterRepository.FuzzyGetByName(m.Trim()).ToString());
                 }).WhenStartWith("偶像"));
 
             _commandParser.Add(
                 new StringParsing((c, m) =>
                 {
-                    var id = int.Parse(_intRegex.Match(m).Value, CultureInfo.CurrentCulture);
+                    var result = TryGetNum(m, out var id);
+                    if (!result)
+                    {
+                        c.ReturnMessage.Add("团团需要你提供卡的id!(毕竟团团目前还只会这么找x)");
+                        return;
+                    }
                     c.ReturnMessage.Add(ProcessMessageUtils.LargeCardPic(id));
                 }).WhenStartWith("卡图"));
 
             _commandParser.Add(
                 new StringParsing((c, m) =>
                 {
-                    var id = int.Parse(_intRegex.Match(m).Value, CultureInfo.CurrentCulture);
+                    var result = TryGetNum(m, out var id);
+                    if (!result)
+                    {
+                        c.ReturnMessage.Add("团团需要你提供卡的id!(毕竟团团目前还只会这么找x)");
+                        return;
+                    }
                     c.ReturnMessage.Add(
                         _cardRepository.GetById(id).ToString());
                 }).WhenStartWith("卡数据"));
