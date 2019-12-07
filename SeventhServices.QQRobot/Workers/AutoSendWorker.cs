@@ -50,8 +50,8 @@ namespace SeventhServices.QQRobot.Workers
                     await _messagePipeline.Pocess(
                         fromGroup: RobotOptions.ServeGroup,
                         fromQq: RobotOptions.MasterQq,
-                        message: "团团检查更新",
-                        msgType: MsgType.Friend
+                        message: "团团查档线",
+                        msgType: MsgType.Group
                     ).ConfigureAwait(false);
 
                 }
