@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using SeventhServices.Client.Common.Params;
@@ -22,6 +23,21 @@ namespace SeventhServices.QQRobot.Extensions
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="pickupPid"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static string FormatLoginBonus(this IEnumerable<LoginBonus> response)
+        {
+            return string.Join("\n", response.Select(
+                l => $"{l.LoginBonusName} * {l.LoginCount}\n" +
+                               $"[DeadLine] : {l.Deadline}"));
         }
 
         /// <summary>
@@ -97,7 +113,7 @@ namespace SeventhServices.QQRobot.Extensions
             return string.Join("\n",
                 response.EventRankingUser.UserRanking.EventParticipants[range]
                     .Select(b => $"[{b.Rank}位] : {b.Score}pt \n" +
-                                 $"[Level / Name / id] \n:lv.{b.Level} / {b.UserName} / {b.UserId}"));
+                                 $"[Profile] \n:lv.{b.Level} / {b.UserName} / {b.UserId}"));
         }
         /// <summary>
         /// 

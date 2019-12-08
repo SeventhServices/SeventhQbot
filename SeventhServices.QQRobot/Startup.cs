@@ -35,6 +35,7 @@ namespace SeventhServices.QQRobot
         }
 
         public IConfiguration Configuration { get; }
+        
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -76,7 +77,7 @@ namespace SeventhServices.QQRobot
                     Version = "v1",
                     Title = "Seventh QQRobot",
                     Contact = new OpenApiContact(),
-                    Description = " "
+                    Description = ""
                 });
                 foreach (var xml in Configuration.GetSection("XmlDocuments").GetChildren())
                 {

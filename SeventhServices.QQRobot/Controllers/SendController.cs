@@ -18,12 +18,10 @@ namespace SeventhServices.QQRobot.Controllers
     public class SendController : Controller
     {
         private readonly ISendMessageService _sendMessageService;
-        private readonly IQqLightClient _qqLightClient;
 
-        public SendController(ISendMessageService sendMessageService,IQqLightClient qqLightClient)
+        public SendController(ISendMessageService sendMessageService)
         {
             _sendMessageService = sendMessageService;
-            _qqLightClient = qqLightClient;
         }
 
 

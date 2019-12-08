@@ -82,9 +82,14 @@ namespace SeventhServices.QQRobot.Services
             }
 
             _commandParser.Add(
-                new StringParsing(c => { 
-                        c.Continue = true;
-                    })
+                new StringParsing(c =>
+                {
+                    RequestParams.Version = _statusService.GameVersion.Version;
+                    RequestParams.Pid = _statusService.Account.Pid;
+                    RequestParams.Uuid = _statusService.Account.Uuid;
+                    RequestParams.Rev = _statusService.Rev;
+                    c.Continue = true;
+                })
                     .WhenStartWith(RobotOptions.Command)
                     .BreakOnFailed(true));
 
@@ -107,12 +112,20 @@ namespace SeventhServices.QQRobot.Services
                 RequestParams.Rev = rev;
 
                 var robotStatus = ConfigureWatcher.GetFreshConfigure<RobotStatus>();
-                robotStatus.Downloadconfig = 
+                robotStatus.Downloadconfig =
                     _apiClient.Inspection(new InspectionRequest())
                     .GetAwaiter().GetResult().Inspection.DownloadConfig;
 
+                var myPageResult = _apiClient.MyPage(new MyPageRequest { SubRev = robotStatus.SubRev }).GetAwaiter().GetResult();
+
+                if (myPageResult.CheckError(c))
+                {
+                    return;
+                }
+
                 c.ReturnMessage.Add($"[Version]:{RequestParams.Version}\n" +
                                     $"[Rev]:{RequestParams.Rev}\n" +
+                                    $"[SubRev] : {myPageResult.MyPage.SubRev}\n" +
                                     robotStatus.Downloadconfig.FormatToString());
 
                 ConfigureWatcher.RefreshConfigure<RobotStatus>(robotStatus);
@@ -124,24 +137,38 @@ namespace SeventhServices.QQRobot.Services
 
                 var binding = _bindRepository.GetOneByQq(q);
 
-                if (!binding.CheckBinding(c,q))
+                if (!binding.CheckBinding(c, q))
                 {
                     return;
                 }
 
                 var loginRequest = new LoginRequest();
                 loginRequest.UseAccount(binding.BoundAccount.Pid, binding.BoundAccount.Uuid);
-                var result = _apiClient.Login(loginRequest).GetAwaiter().GetResult();
+                var loginResult = _apiClient.Login(loginRequest).GetAwaiter().GetResult();
 
-                if (result.CheckError(c))
+                if (loginResult.CheckError(c))
                 {
                     return;
                 }
 
                 c.ReturnMessage.Add($"[{q}:登录成功" +
-                                    $"[isRev]:{result.IsDevelopment}\n" +
-                                    $"[Profile]:{result.Login.UserStatus.UserId}/{result.Login.UserStatus.UserName}/{result.Login.UserStatus.UserCode}]" +
-                                    $"{ProcessMessageUtils.LargeCardPic(result.Login.UserStatus.ProfileCardId)}");
+                                    $"[isRev]:{loginResult.IsDevelopment}\n" +
+                                    $"[Profile]:{loginResult.Login.UserStatus.UserId}/{loginResult.Login.UserStatus.UserName}/{loginResult.Login.UserStatus.UserCode}]" +
+                                    $"{ProcessMessageUtils.LargeCardPic(loginResult.Login.UserStatus.ProfileCardId)}");
+
+                var myPageRequest = new MyPageRequest();
+                myPageRequest.UseAccount(binding.BoundAccount.Pid, binding.BoundAccount.Uuid);
+                var myPageResult = _apiClient.MyPage(myPageRequest).GetAwaiter().GetResult();
+
+                if (myPageResult.CheckError(c))
+                {
+                    return;
+                }
+
+                c.ReturnMessage.Add($"[{q}:签到成功" +
+                                    $"[isRev]:{myPageResult.IsDevelopment}\n" +
+                                    $"[SubRev] : {myPageResult.MyPage.SubRev}\n [LoginBonus] : \n" +
+                                    myPageResult.MyPage.LoginBonusList.FormatLoginBonus());
 
             }).WhenStartWith("游戏签到"));
 
@@ -150,7 +177,7 @@ namespace SeventhServices.QQRobot.Services
 
                 var binding = _bindRepository.GetOneByQq(q);
 
-                if (!binding.CheckBinding(c,q))
+                if (!binding.CheckBinding(c, q))
                 {
                     return;
                 }
@@ -166,7 +193,7 @@ namespace SeventhServices.QQRobot.Services
 
                 c.ReturnMessage.Add($"[{q}:Presents" +
                                     $"[isRev]:{result.IsDevelopment}\n" +
-                                    string.Join("\n",result.PresentBox.UserPresentList.Take(3).Select( p => p.FormatToString())));
+                                    string.Join("\n", result.PresentBox.UserPresentList.Take(3).Select(p => p.FormatToString())));
 
             }).WhenStartWith("游戏礼物"));
 
@@ -244,6 +271,11 @@ namespace SeventhServices.QQRobot.Services
         {
             _commandParser.Add(new StringParsing((c, m, q) =>
             {
+                var result = TryGetNum(m, out var pid);
+                if (!result)
+                {
+                    c.ReturnMessage.Add("团团想要一个正确的Pid!");
+                }
                 try
                 {
                     var addResult = _bindRepository.Add(new AccountBinding
@@ -251,7 +283,7 @@ namespace SeventhServices.QQRobot.Services
                         Qq = q,
                         BindTime = DateTime.Now,
                         IsPidOnly = true,
-                        BoundAccountPid = m.Trim(),
+                        BoundAccountPid = pid.ToString(CultureInfo.CurrentCulture),
                         BoundAccount = new BoundAccount(q, m.Trim(), string.Empty, false)
                     });
 
@@ -362,14 +394,10 @@ namespace SeventhServices.QQRobot.Services
 
         private void AddQuery()
         {
-            _commandParser.Add(new StringParsing( c =>
-                {
-                    RequestParams.Version = _statusService.GameVersion.Version;
-                    RequestParams.Pid = _statusService.Account.Pid;
-                    RequestParams.Uuid = _statusService.Account.Uuid;
-                    RequestParams.Rev = _statusService.Rev;
-                    c.Continue = true;
-                })
+            _commandParser.Add(new StringParsing(c =>
+               {
+                   c.Continue = true;
+               })
             .WhenStartWith("查"));
 
             _commandParser.Add(new StringParsing((c, m) =>
@@ -393,7 +421,7 @@ namespace SeventhServices.QQRobot.Services
                    result.FriendSearch.SearchList.Take(5).Select(f =>
                        $"[{f.UserName}] : lv.{f.Level} \n" +
                        $"[Pid] : {f.UserId}\n" +
-                       $"{f.Comment}\n"
+                       $"{f.Comment}"
                    )));
 
            }).WhenStartWith("支配人"));
@@ -450,12 +478,12 @@ namespace SeventhServices.QQRobot.Services
                         PickupUserId = pid
                     }).GetAwaiter().GetResult();
 
-                    if ( result.CheckError(c) )
+                    if (result.CheckError(c))
                     {
                         return;
                     }
 
-                    c.ReturnMessage.Add(result.FormatRankingWithPickupPid(DateTime.Now, pid , 7)
+                    c.ReturnMessage.Add(result.FormatRankingWithPickupPid(DateTime.Now, pid, 7)
                         ?? "团团没找到你的排名...是不是你这次活动摸了！");
                 }
                 else

@@ -29,7 +29,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="SeventhServices.Asset" Version="0.0.9-develop" />
-    <PackageReference Include="SeventhServices.Asset.Services" Version="0.0.9-develop" />
+    <PackageReference Include="SeventhServices.Asset.Services" Version="0.1.0-develop" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="WebApiClient.Extensions.DependencyInjection" Version="2.0.3" />
   </ItemGroup>

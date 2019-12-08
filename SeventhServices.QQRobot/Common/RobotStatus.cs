@@ -11,7 +11,11 @@ namespace SeventhServices.QQRobot.Common
         public OpenEventType OpenEventType { get; set; } 
             = OpenEventType.Nnlive;
 
+        public int SubRev { get; set; } = 3;
+
         public Downloadconfig Downloadconfig { get; set; } 
             = new Downloadconfig();
+
+
     }
 }
