@@ -35,6 +35,10 @@ namespace SeventhServices.QQRobot.Extensions
         /// <returns></returns>
         public static string FormatLoginBonus(this IEnumerable<LoginBonus> response)
         {
+            if (response == null)
+            {
+                return string.Empty;
+            }
             return string.Join("\n", response.Select(
                 l => $"{l.LoginBonusName} * {l.LoginCount}\n" +
                                $"[DeadLine] : {l.Deadline}"));

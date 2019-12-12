@@ -55,5 +55,5 @@ namespace SeventhServices.QQRobot.Services
             return await SendAsync(message, null, group, MsgType.Group)
                 .ConfigureAwait(false);
         }
-    }
+    } 
 }

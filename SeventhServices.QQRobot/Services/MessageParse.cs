@@ -112,7 +112,7 @@ namespace SeventhServices.QQRobot.Services
                 RequestParams.Rev = rev;
 
                 var robotStatus = ConfigureWatcher.GetFreshConfigure<RobotStatus>();
-                robotStatus.Downloadconfig =
+                robotStatus.DownloadConfig =
                     _apiClient.Inspection(new InspectionRequest())
                     .GetAwaiter().GetResult().Inspection.DownloadConfig;
 
@@ -126,7 +126,7 @@ namespace SeventhServices.QQRobot.Services
                 c.ReturnMessage.Add($"[Version]:{RequestParams.Version}\n" +
                                     $"[Rev]:{RequestParams.Rev}\n" +
                                     $"[SubRev] : {myPageResult.MyPage.SubRev}\n" +
-                                    robotStatus.Downloadconfig.FormatToString());
+                                    robotStatus.DownloadConfig.FormatToString());
 
                 ConfigureWatcher.RefreshConfigure<RobotStatus>(robotStatus);
 
@@ -387,7 +387,16 @@ namespace SeventhServices.QQRobot.Services
 
             _commandParser.Add(new StringParsing((c, m, q) =>
             {
-                _bindRepository.RemoveAll(q);
+                try
+                {
+                    _bindRepository.RemoveAll(q);
+                }
+                catch (Exception e)
+                {
+                    c.ReturnMessage.Add($"取消失败{e.Message}");
+                    return;
+                }
+
                 c.ReturnMessage.Add("已取消绑定");
             }).WhenStartWith("取消全部绑定"));
         }

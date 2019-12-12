@@ -13,9 +13,9 @@ namespace SeventhServices.QQRobot.Common
 
         public int SubRev { get; set; } = 3;
 
-        public Downloadconfig Downloadconfig { get; set; } 
+        public Downloadconfig DownloadConfig { get; set; } 
             = new Downloadconfig();
 
-
+   
     }
 }
