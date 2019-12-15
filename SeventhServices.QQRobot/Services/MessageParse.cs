@@ -83,13 +83,13 @@ namespace SeventhServices.QQRobot.Services
 
             _commandParser.Add(
                 new StringParsing(c =>
-                {
-                    RequestParams.Version = _statusService.GameVersion.Version;
-                    RequestParams.Pid = _statusService.Account.Pid;
-                    RequestParams.Uuid = _statusService.Account.Uuid;
-                    RequestParams.Rev = _statusService.Rev;
-                    c.Continue = true;
-                })
+                    {
+                        RequestParams.Version = _statusService.GameVersion.Version;
+                        RequestParams.Pid = _statusService.Account.Pid;
+                        RequestParams.Uuid = _statusService.Account.Uuid;
+                        RequestParams.Rev = _statusService.Rev;
+                        c.Continue = true;
+                    })
                     .WhenStartWith(RobotOptions.Command)
                     .BreakOnFailed(true));
 
@@ -123,9 +123,11 @@ namespace SeventhServices.QQRobot.Services
                     return;
                 }
 
+                robotStatus.SubRev = myPageResult.MyPage.SubRev;
+
                 c.ReturnMessage.Add($"[Version]:{RequestParams.Version}\n" +
                                     $"[Rev]:{RequestParams.Rev}\n" +
-                                    $"[SubRev] : {myPageResult.MyPage.SubRev}\n" +
+                                    $"[SubRev] : {robotStatus.SubRev}\n" +
                                     robotStatus.DownloadConfig.FormatToString());
 
                 ConfigureWatcher.RefreshConfigure<RobotStatus>(robotStatus);
@@ -256,8 +258,10 @@ namespace SeventhServices.QQRobot.Services
                 if (paramExisted && Enum.IsDefined(typeof(OpenEventType), param))
                 {
                     var robotStatus = ConfigureWatcher.GetFreshConfigure<RobotStatus>();
+
                     robotStatus.OpenEventType = (OpenEventType)param;
                     c.ReturnMessage.Add(robotStatus.OpenEventType.ToString());
+
                     ConfigureWatcher.RefreshConfigure<RobotStatus>(robotStatus);
                 }
                 else
@@ -475,6 +479,40 @@ namespace SeventhServices.QQRobot.Services
                 }
             })).WhenStartWith("档线"));
 
+            _commandParser.Add(new StringParsing(((c, m) =>
+            {
+                var paramExisted = TryGetNum(m, out var maxRank);
+                if (paramExisted)
+                {
+                    var maxRankResult = _apiClient.EventRankingUser(new EventRankingUserRequest
+                    {
+                        EventType = ConfigureWatcher.GetFreshConfigure<RobotStatus>().OpenEventType,
+                        RankingType = RankingCategory.HighScoreRanking,
+                        MaxRank = maxRank
+                    }).GetAwaiter().GetResult();
+
+                    if (maxRankResult.CheckError(c))
+                    {
+                        return;
+                    }
+
+                    c.ReturnMessage.Add(maxRankResult.FormatRanking(DateTime.Now, 7));
+                    return;
+                }
+
+                var robotStatus = ConfigureWatcher.GetFreshConfigure<RobotStatus>();
+                var result = _apiClient.EventRankingUser(new EventRankingUserRequest
+                { EventType = robotStatus.OpenEventType, RankingType = RankingCategory.HighScoreRanking }).GetAwaiter().GetResult();
+
+                if (result.CheckError(c))
+                {
+                    return;
+                }
+
+                c.ReturnMessage.Add(result.FormatBorder(DateTime.Now));
+
+            })).WhenStartWith("高分档线"));
+
             _commandParser.Add(new StringParsing(((c, m, q) =>
             {
                 var bind = _bindRepository.GetOneByQq(q);
@@ -501,6 +539,34 @@ namespace SeventhServices.QQRobot.Services
                                         "私信格式 [ 团团绑定 pid (这里填pid) uid (这里填id) ]");
                 }
             })).WhenStartWith("我的档线"));
+
+            _commandParser.Add(new StringParsing(((c, m, q) =>
+            {
+                var bind = _bindRepository.GetOneByQq(q);
+                if (bind != null)
+                {
+                    var pid = Convert.ToInt32(bind.BoundAccountPid, CultureInfo.CurrentCulture);
+                    var result = _apiClient.EventRankingUser(new EventRankingUserRequest
+                    {
+                        EventType = ConfigureWatcher.GetFreshConfigure<RobotStatus>().OpenEventType,
+                        RankingType = RankingCategory.HighScoreRanking,
+                        PickupUserId = pid
+                    }).GetAwaiter().GetResult();
+
+                    if (result.CheckError(c))
+                    {
+                        return;
+                    }
+
+                    c.ReturnMessage.Add(result.FormatRankingWithPickupPid(DateTime.Now, pid, 7)
+                                        ?? "团团没找到你的排名...是不是你这次活动摸了！");
+                }
+                else
+                {
+                    c.ReturnMessage.Add($"{q}未绑定，请私信团团pid/id(账号文件内)绑定哦\n" +
+                                        "私信格式 [ 团团绑定 pid (这里填pid) uid (这里填id) ]");
+                }
+            })).WhenStartWith("我的高分档线"));
 
             _commandParser.Add(
                 new StringParsing((c, m) =>

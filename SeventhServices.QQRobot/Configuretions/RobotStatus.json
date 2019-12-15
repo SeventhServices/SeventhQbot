@@ -1,10 +1,11 @@
 {
-  "LastEventBorderDateTime": "2019-12-06T22:03:07.3654629+08:00",
+  "LastEventBorderDateTime": "2019-12-14T19:40:45.0483962+08:00",
   "OpenEventType": 12,
-  "Downloadconfig": {
+  "SubRev": 3,
+  "DownloadConfig": {
     "Domain": "https://d2kvktrbzlzxwg.cloudfront.net/",
     "SubDomain": "https://cache.t7s.jp/",
-    "OneByOneDownloadPath": "revision/raw373_addaca8ad3cf92db8400b3da1b2bfd6c/"
+    "OneByOneDownloadPath": "revision/raw374_d292e01ef4cfb0e197c5b946b07a1a9c/"
   },
-  "LastModify": "2019-12-06T14:03:07.3682604Z"
+  "LastModify": "2019-12-14T11:40:45.0499367Z"
 }

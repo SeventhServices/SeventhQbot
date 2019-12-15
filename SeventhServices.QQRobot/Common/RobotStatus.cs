@@ -9,12 +9,13 @@ namespace SeventhServices.QQRobot.Common
     {
         public DateTime LastEventBorderDateTime { get; set; }
         public OpenEventType OpenEventType { get; set; } 
-            = OpenEventType.Nnlive;
+            = OpenEventType.None;
 
         public int SubRev { get; set; } = 3;
 
         public Downloadconfig DownloadConfig { get; set; } 
             = new Downloadconfig();
+
 
    
     }
