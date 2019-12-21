@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.138
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot", "SeventhServices.QQRobot\SeventhServices.QQRobot.csproj", "{F6174BEB-572D-43A4-8CCB-89EFD01F8E4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot", "src\SeventhServices.QQRobot\SeventhServices.QQRobot.csproj", "{F6174BEB-572D-43A4-8CCB-89EFD01F8E4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Client", "SeventhServices.QQRobot.Client\SeventhServices.QQRobot.Client.csproj", "{E672AB68-CC9A-4331-804C-34B2C88C5E05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Client", "src\SeventhServices.QQRobot.Client\SeventhServices.QQRobot.Client.csproj", "{E672AB68-CC9A-4331-804C-34B2C88C5E05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.Asset.LocalDB", "SeventhServices.Asset.LocalDB\SeventhServices.Asset.LocalDB.csproj", "{74919C13-65F1-4A1C-A179-12953F2176EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.Resource.Asset.SqlLoader", "src\SeventhServices.Resource.Asset.SqlLoader\SeventhServices.Resource.Asset.SqlLoader.csproj", "{74919C13-65F1-4A1C-A179-12953F2176EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Parser", "SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj", "{646F8348-6A78-4EC3-9721-7CD7A1B2842B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Parser", "src\SeventhServices.QQRobot.Parser\SeventhServices.QQRobot.Parser.csproj", "{646F8348-6A78-4EC3-9721-7CD7A1B2842B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Resource", "SeventhServices.QQRobot.Resource\SeventhServices.QQRobot.Resource.csproj", "{AD719076-4640-4605-8B0D-18087BCF5D23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeventhServices.QQRobot.Resource", "src\SeventhServices.QQRobot.Resource\SeventhServices.QQRobot.Resource.csproj", "{AD719076-4640-4605-8B0D-18087BCF5D23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

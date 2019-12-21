@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <AssemblyName>SeventhServices.Resource.Asset.SqlLoader</AssemblyName>
+    <RootNamespace>SeventhServices.Resource.Asset.SqlLoader</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GameSqls\**" />
+    <EmbeddedResource Remove="GameSqls\**" />
+    <None Remove="GameSqls\**" />
+  </ItemGroup>
+
+</Project>
